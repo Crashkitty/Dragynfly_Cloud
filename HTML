@@ -1,0 +1,154 @@
+<header>
+    <div class="container">
+      <span class="badge">Clinical Research MVP</span>
+      <h1>Dragonfly Cloud Diabetes Taiyi Platform</h1>
+      <p class="hero-text">
+        A MERN-ready clinical research frontend for participant onboarding, telemedicine check-ins,
+        Taiyi intervention delivery, secure file sharing, food diaries, lab tracking, and provider workflow management.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#dashboard">View Dashboard</a>
+        <a class="button secondary" href="#intake">Add Patient</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="requirements">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <h2>Project Requirements</h2>
+            <p class="muted">Functional and technical requirements from the Dragonfly Cloud project brief.</p>
+          </div>
+          <input class="search" id="searchInput" type="search" placeholder="Search requirements..." />
+        </div>
+
+        <div class="grid" id="requirementsGrid">
+          <article class="card requirement" data-text="project overview dragonfly cloud diabetes taiyi pilot study">
+            <div class="card-top"><div class="icon">🩺</div><span class="number">1</span></div>
+            <h3>Project Overview</h3>
+            <p>Cross-platform clinical solution with a mobile app and desktop interface for protocol and data management.</p>
+          </article>
+
+          <article class="card requirement" data-text="project scope mvp telemedicine treatment interventions secure file sharing">
+            <div class="card-top"><div class="icon">📋</div><span class="number">2</span></div>
+            <h3>Project Scope</h3>
+            <p>Version 1 MVP focuses on core workflows, telemedicine check-ins, treatment interventions, and secure file sharing.</p>
+          </article>
+
+          <article class="card requirement" data-text="mobile app patient consent diabetes history blood sugar tracking food diary activity">
+            <div class="card-top"><div class="icon">📱</div><span class="number">3.1</span></div>
+            <h3>Mobile App</h3>
+            <p>Patient-facing consent, history, blood sugar, labs, food diary, Taiyi videos, and activity tracking.</p>
+          </article>
+
+          <article class="card requirement" data-text="desktop provider research pi workflow management ai summaries file review">
+            <div class="card-top"><div class="icon">👥</div><span class="number">3.2</span></div>
+            <h3>Desktop Platform</h3>
+            <p>Provider and Research PI workflow management with AI-supported patient summaries and file review.</p>
+          </article>
+
+          <article class="card requirement" data-text="api connectivity bastion database external integration workflow extension">
+            <div class="card-top"><div class="icon">🗄️</div><span class="number">4.1</span></div>
+            <h3>API Connectivity</h3>
+            <p>APIs support structured data access, external system integration, and BASTION database connectivity.</p>
+          </article>
+
+          <article class="card requirement" data-text="data imaging file upload dicom viewer integration">
+            <div class="card-top"><div class="icon">☁️</div><span class="number">4.2</span></div>
+            <h3>Data & Imaging</h3>
+            <p>V1 supports basic file upload and review; future releases can add DICOM ingestion and viewer integration.</p>
+          </article>
+
+          <article class="card requirement" data-text="security compliance secure middleware keragon ehr hipaa">
+            <div class="card-top"><div class="icon">🔒</div><span class="number">4.3</span></div>
+            <h3>Security & Compliance</h3>
+            <p>Data retrieval and synchronization should use secure middleware for future EHR exploration.</p>
+          </article>
+
+          <article class="card requirement" data-text="performance video chat real time frontend backend">
+            <div class="card-top"><div class="icon">🎥</div><span class="number">4.4</span></div>
+            <h3>Performance</h3>
+            <p>Backend and frontend services should be optimized for real-time video and chat interactions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <div class="container dashboard">
+        <div class="card">
+          <h2>Patient Check-in Queue</h2>
+          <p class="muted">Example provider dashboard panel.</p>
+
+          <div class="queue-item">
+            <div><strong>Maria L.</strong><span>Blood sugar uploaded</span></div>
+            <strong>126 mg/dL</strong>
+          </div>
+          <div class="queue-item">
+            <div><strong>James R.</strong><span>HbA1c lab pending review</span></div>
+            <strong>7.1%</strong>
+          </div>
+          <div class="queue-item">
+            <div><strong>Amina K.</strong><span>Taiyi movement video completed</span></div>
+            <strong>18 min</strong>
+          </div>
+        </div>
+
+        <div class="card" id="intake">
+          <h2>Patient Intake</h2>
+          <p class="muted">This form can connect to your MERN API using fetch().</p>
+
+          <form id="patientForm">
+            <input type="text" id="name" placeholder="Patient name" required />
+            <input type="email" id="email" placeholder="Patient email" />
+            <input type="number" id="bloodSugar" placeholder="Blood sugar reading" />
+            <select id="checkInStatus">
+              <option value="pending">Pending</option>
+              <option value="reviewed">Reviewed</option>
+              <option value="needs-follow-up">Needs follow-up</option>
+            </select>
+            <textarea id="history" placeholder="Diabetes-focused medical history"></textarea>
+            <button class="primary" type="submit">Save Patient</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container two-column">
+        <div class="card">
+          <h2>Patient Mobile App</h2>
+          <p class="muted">Core patient-facing features.</p>
+          <div class="feature-list">
+            <span class="pill">Consent intake</span>
+            <span class="pill">Demographics</span>
+            <span class="pill">Medical history</span>
+            <span class="pill">Blood sugar tracking</span>
+            <span class="pill">Telemedicine</span>
+            <span class="pill">Taiyi videos</span>
+            <span class="pill">HbA1c labs</span>
+            <span class="pill">Food diary</span>
+            <span class="pill">Activity tracking</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Provider / Research PI Desktop</h2>
+          <p class="muted">Core provider and research workflow features.</p>
+          <div class="feature-list">
+            <span class="pill">Workflow dashboard</span>
+            <span class="pill">AI-supported summaries</span>
+            <span class="pill">Patient record review</span>
+            <span class="pill">Secure file review</span>
+            <span class="pill">Bastion database connection</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Dragonfly Cloud — Diabetes Taiyi Intervention Pilot Study</div>
+  </footer>
