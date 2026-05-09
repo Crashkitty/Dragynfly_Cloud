@@ -1,0 +1,304 @@
+import React, { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Activity, CalendarCheck, FileText, ShieldCheck, Stethoscope, UploadCloud, Video, Utensils, Users, Database, Search } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const requirements = [
+  {
+    section: "1",
+    title: "Project Overview",
+    body: "Dragonfly Cloud—Diabetes Taiyi Intervention Pilot Study delivers a cross-platform clinical solution for mobile app and desktop protocol/data management.",
+    icon: Stethoscope,
+  },
+  {
+    section: "2",
+    title: "Project Scope",
+    body: "Version 1 MVP focuses on core workflows, telemedicine check-ins, treatment interventions, and secure file sharing.",
+    icon: CalendarCheck,
+  },
+  {
+    section: "3.1",
+    title: "Mobile App: Patient-Facing",
+    body: "Consent, demographics, diabetes history, blood sugar tracking, telemedicine, Taiyi videos, labs, food diary, and activity tracking.",
+    icon: Activity,
+  },
+  {
+    section: "3.2",
+    title: "Desktop Platform: Provider / Research PI",
+    body: "Provider and Research PI workflow management with AI-supported patient summaries and file review.",
+    icon: Users,
+  },
+  {
+    section: "4.1",
+    title: "Platforms & API Connectivity",
+    body: "Structured API access connects external integrations and workflow extensions to the BASTION database.",
+    icon: Database,
+  },
+  {
+    section: "4.2",
+    title: "Data & Imaging",
+    body: "V1 supports secure file upload and review, with future DICOM ingestion and third-party viewer integration.",
+    icon: UploadCloud,
+  },
+  {
+    section: "4.3",
+    title: "Security & Compliance",
+    body: "Secure middleware can support future EHR exploration while HIPAA-conscious data workflows are planned from the start.",
+    icon: ShieldCheck,
+  },
+  {
+    section: "4.4",
+    title: "Performance",
+    body: "Frontend and backend services are optimized for real-time video and chat interactions.",
+    icon: Video,
+  },
+];
+
+const mobileFeatures = [
+  "HIPAA-compliant consent intake",
+  "Diabetes-focused medical history",
+  "Blood sugar tracking and daily check-ins",
+  "Telemedicine chat and video consultations",
+  "Taiyi routine instruction videos",
+  "Labs upload and HbA1c tracking",
+  "Food diary with meal/menu photos",
+  "Physical activity tracking",
+];
+
+const providerFeatures = [
+  "Provider / Research PI workflow dashboard",
+  "AI-supported patient input summaries",
+  "File review tied to patient records",
+];
+
+function FeaturePill({ children }) {
+  return <span className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700">{children}</span>;
+}
+
+export default function DragonflyCloudFrontend() {
+  const [query, setQuery] = useState("");
+
+  const filteredRequirements = useMemo(() => {
+    const q = query.toLowerCase().trim();
+    if (!q) return requirements;
+    return requirements.filter((item) => `${item.title} ${item.body} ${item.section}`.toLowerCase().includes(q));
+  }, [query]);
+
+  return (
+    <main className="min-h-screen bg-slate-50 text-slate-950">
+      <section className="mx-auto grid max-w-7xl gap-8 px-6 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+        <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="flex flex-col justify-center">
+          <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm">
+            <ShieldCheck className="h-4 w-4" /> Clinical Research MVP
+          </div>
+          <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
+            Dragonfly Cloud Diabetes Taiyi Intervention Platform
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+            A MERN-stack clinical research app for participant onboarding, telemedicine check-ins, intervention delivery, secure file sharing, and provider workflow management.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button className="rounded-2xl px-5">View Dashboard</Button>
+            <Button variant="outline" className="rounded-2xl px-5">Upload Patient File</Button>
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.45, delay: 0.1 }}>
+          <Card className="rounded-3xl border-0 shadow-xl">
+            <CardContent className="p-6">
+              <div className="mb-5 flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-slate-500">Today</p>
+                  <h2 className="text-2xl font-semibold">Patient Check-in Queue</h2>
+                </div>
+                <div className="rounded-2xl bg-slate-100 p-3">
+                  <FileText className="h-6 w-6" />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  ["Maria L.", "Blood sugar uploaded", "126 mg/dL"],
+                  ["James R.", "HbA1c lab pending review", "7.1%"],
+                  ["Amina K.", "Taiyi movement video completed", "18 min"],
+                ].map(([name, status, value]) => (
+                  <div key={name} className="flex items-center justify-between rounded-2xl bg-slate-50 p-4">
+                    <div>
+                      <p className="font-medium">{name}</p>
+                      <p className="text-sm text-slate-500">{status}</p>
+                    </div>
+                    <p className="font-semibold">{value}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-10 lg:px-10">
+        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-3xl font-semibold">Functional Requirements</h2>
+            <p className="mt-2 text-slate-600">Mobile participant tools and desktop provider/research workflows.</p>
+          </div>
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search requirements..."
+              className="w-full rounded-2xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 outline-none ring-slate-300 focus:ring-2"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {filteredRequirements.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Card key={item.section} className="rounded-3xl border-0 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <CardContent className="p-5">
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="rounded-2xl bg-slate-100 p-3"><Icon className="h-5 w-5" /></div>
+                    <span className="text-sm font-semibold text-slate-400">{item.section}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-12 lg:grid-cols-2 lg:px-10">
+        <Card className="rounded-3xl border-0 shadow-sm">
+          <CardContent className="p-6">
+            <div className="mb-5 flex items-center gap-3">
+              <Activity className="h-6 w-6" />
+              <h2 className="text-2xl font-semibold">Patient Mobile App</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">{mobileFeatures.map((f) => <FeaturePill key={f}>{f}</FeaturePill>)}</div>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-3xl border-0 shadow-sm">
+          <CardContent className="p-6">
+            <div className="mb-5 flex items-center gap-3">
+              <Users className="h-6 w-6" />
+              <h2 className="text-2xl font-semibold">Provider / Research PI Desktop</h2>
+            </div>
+            <div className="flex flex-wrap gap-2">{providerFeatures.map((f) => <FeaturePill key={f}>{f}</FeaturePill>)}</div>
+          </CardContent>
+        </Card>
+      </section>
+    </main>
+  );
+}
+
+/*
+MERN backend starter
+
+server.js
+--------------------------------------------------
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const PatientSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: String,
+  diabetesHistory: String,
+  bloodSugarLogs: [{ value: Number, unit: { type: String, default: "mg/dL" }, loggedAt: Date }],
+  hba1c: Number,
+  checkInStatus: { type: String, default: "pending" },
+  files: [{ filename: String, url: String, uploadedAt: Date }],
+}, { timestamps: true });
+
+const Patient = mongoose.model("Patient", PatientSchema);
+
+app.get("/api/patients", async (_req, res) => {
+  const patients = await Patient.find().sort({ updatedAt: -1 });
+  res.json(patients);
+});
+
+app.post("/api/patients", async (req, res) => {
+  const patient = await Patient.create(req.body);
+  res.status(201).json(patient);
+});
+
+app.post("/api/patients/:id/blood-sugar", async (req, res) => {
+  const patient = await Patient.findByIdAndUpdate(
+    req.params.id,
+    { $push: { bloodSugarLogs: { ...req.body, loggedAt: new Date() } } },
+    { new: true }
+  );
+  res.json(patient);
+});
+
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+  app.listen(process.env.PORT || 5000, () => console.log("API running"));
+});
+
+.env
+--------------------------------------------------
+MONGODB_URI=mongodb://127.0.0.1:27017/dragonfly_cloud
+PORT=5000
+
+Install
+--------------------------------------------------
+client: npm install framer-motion lucide-react @shadcn/ui
+server: npm install express mongoose cors dotenv
+*/
+const searchInput = document.getElementById("searchInput");
+    const requirementCards = document.querySelectorAll(".requirement");
+
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      requirementCards.forEach(function (card) {
+        const text = card.dataset.text.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+      });
+    });
+
+    document.getElementById("patientForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const patient = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        diabetesHistory: document.getElementById("history").value,
+        checkInStatus: document.getElementById("checkInStatus").value,
+        bloodSugarLogs: [
+          {
+            value: Number(document.getElementById("bloodSugar").value),
+            unit: "mg/dL",
+            loggedAt: new Date()
+          }
+        ]
+      };
+
+      console.log("Patient payload for MERN API:", patient);
+
+      /*
+      To connect this to Express/MongoDB:
+
+      await fetch("http://localhost:5000/api/patients", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(patient)
+      });
+      */
+
+      alert("Patient saved locally. Connect fetch() to your MERN backend when ready.");
+      this.reset();
+    });
