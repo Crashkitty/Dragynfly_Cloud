@@ -1,0 +1,284 @@
+/* Dragonfly design tokens, mobile-first. Source: design/DESIGN.md */
+
+:root {
+  --color-primary: #0e5a6f;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #c7e8ee;
+  --color-on-primary-container: #002731;
+  --color-secondary: #4a5c66;
+  --color-tertiary: #9e4a1f;
+  --color-tertiary-pressed: #7d3815;
+  --color-on-tertiary: #ffffff;
+  --color-neutral: #faf7f2;
+  --color-on-neutral: #1a1f22;
+  --color-surface: #ffffff;
+  --color-on-surface: #1a1f22;
+  --color-outline: #b5bdc2;
+  --color-success: #2e6b47;
+  --color-on-success: #ffffff;
+  --color-warning: #8f5215;
+  --color-on-warning: #ffffff;
+  --color-error: #b23121;
+  --color-on-error: #ffffff;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 1px 3px rgba(26, 31, 34, 0.06), 0 4px 12px rgba(26, 31, 34, 0.04);
+
+  --tap-min: 64px;
+
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-on-neutral);
+  background: var(--color-neutral);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; min-height: 100%; }
+body { background: var(--color-neutral); }
+
+a { color: var(--color-primary); }
+
+/* App shell */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--color-neutral);
+}
+
+.app-bar {
+  height: 72px;
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-neutral);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.app-bar h1 { font-size: 26px; font-weight: 600; line-height: 1.25; margin: 0; }
+.app-bar .right { color: var(--color-secondary); font-size: 16px; }
+
+.screen {
+  flex: 1;
+  padding: 0 var(--space-md) calc(88px + var(--space-xl));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  height: 88px;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-outline);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: var(--space-md) var(--space-sm);
+  gap: var(--space-sm);
+  z-index: 5;
+}
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--color-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+.bottom-nav a.active { color: var(--color-primary); }
+.bottom-nav a .icon { font-size: 24px; }
+
+/* Cards */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+}
+.card h2 { font-size: 22px; font-weight: 600; margin: 0 0 var(--space-md); }
+.card h3 { font-size: 20px; font-weight: 600; margin: 0 0 var(--space-sm); }
+.card p { margin: 0; }
+
+/* Numeric display for glucose */
+.numeric-display {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.01em;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--tap-min);
+  padding: 0 var(--space-lg);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-primary {
+  background: var(--color-tertiary);
+  color: var(--color-on-tertiary);
+}
+.btn-primary:active { background: var(--color-tertiary-pressed); }
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-outline);
+}
+.btn-ghost {
+  background: var(--color-neutral);
+  color: var(--color-primary);
+}
+
+/* Inputs */
+.field { display: flex; flex-direction: column; gap: var(--space-sm); }
+.field label { font-size: 16px; font-weight: 500; color: var(--color-on-neutral); }
+.input, .select, .textarea {
+  height: var(--tap-min);
+  padding: 0 var(--space-md);
+  font-size: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-outline);
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: inherit;
+}
+.textarea { height: auto; padding: var(--space-md); min-height: 96px; }
+
+/* Pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 500;
+}
+.pill-success { background: var(--color-success); color: var(--color-on-success); }
+.pill-warning { background: var(--color-warning); color: var(--color-on-warning); }
+.pill-error   { background: var(--color-error);   color: var(--color-on-error); }
+.pill-muted   { background: var(--color-primary-container); color: var(--color-on-primary-container); }
+
+/* Status helpers for glucose */
+.status-ok { color: var(--color-success); }
+.status-warn { color: var(--color-warning); }
+.status-critical { color: var(--color-error); }
+
+/* Glucose history list */
+.list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-sm); }
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-outline);
+}
+.list li .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+
+/* Login / onboarding center */
+.center-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  min-height: calc(100vh - 88px);
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-md);
+}
+
+.center-stage .brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.center-stage .brand .logo {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-xl);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  display: grid;
+  place-items: center;
+  font-size: 48px;
+}
+.center-stage .brand h1 { font-size: 32px; margin: 0; }
+.center-stage .brand p { color: var(--color-secondary); margin: 0; text-align: center; }
+
+/* Mini sparkline */
+.spark {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+  gap: 4px;
+  align-items: end;
+  height: 64px;
+}
+.spark .bar {
+  background: var(--color-primary-container);
+  border-radius: 2px;
+  min-height: 4px;
+}
+.spark .bar.warn { background: var(--color-warning); opacity: 0.6; }
+.spark .bar.critical { background: var(--color-error); opacity: 0.7; }
+
+/* Section headers */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin: var(--space-md) 0 var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Mvp banner */
+.mvp-banner {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  text-align: center;
+}

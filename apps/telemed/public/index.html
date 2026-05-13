@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dragonfly Telemed</title>
+    <style>
+      :root {
+        --primary: #0e5a6f;
+        --neutral: #faf7f2;
+        --tertiary: #9e4a1f;
+        --on-tertiary: #ffffff;
+        --secondary: #4a5c66;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--neutral);
+        color: #1a1f22;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .card {
+        max-width: 480px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 1px 3px rgba(26, 31, 34, 0.06), 0 4px 12px rgba(26, 31, 34, 0.04);
+      }
+      .logo {
+        width: 64px;
+        height: 64px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+      h1 { font-size: 28px; margin: 0 0 8px; }
+      p { color: var(--secondary); line-height: 1.5; margin: 8px 0 24px; }
+      .btn {
+        display: inline-flex;
+        height: 56px;
+        padding: 0 28px;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 18px;
+        background: var(--tertiary);
+        color: var(--on-tertiary);
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: inherit;
+      }
+      .btn:active { background: #7d3815; }
+      .meta {
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="logo" aria-hidden>✦</div>
+      <h1>Dragonfly Telemed</h1>
+      <p>
+        Direct, peer-to-peer video built on Cloudflare Workers + WebRTC. No
+        servers see your media. Click below to start a new room and share the
+        link with your patient or provider.
+      </p>
+      <a href="/new" class="btn">Start a new room</a>
+      <p class="meta">
+        Pilot study scaffold. Designed with healthcare security requirements in
+        mind. Not yet HIPAA-compliant — confirm vendor BAAs before clinical use.
+      </p>
+    </main>
+  </body>
+</html>

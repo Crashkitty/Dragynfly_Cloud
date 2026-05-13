@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dragonfly Telemed Room</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root {
+        --primary: #0e5a6f;
+        --primary-container: #c7e8ee;
+        --on-primary-container: #002731;
+        --neutral: #faf7f2;
+        --secondary: #4a5c66;
+        --surface: #ffffff;
+        --outline: #b5bdc2;
+        --error: #b23121;
+        --success: #2e6b47;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--neutral);
+        color: #1a1f22;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      header {
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--primary);
+        color: #fff;
+        border-bottom: 1px solid #094a5d;
+        font-size: 0.95rem;
+      }
+      header strong { font-weight: 600; }
+      header button {
+        border-radius: 999px;
+        border: none;
+        padding: 8px 14px;
+        font: inherit;
+        cursor: pointer;
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+        margin-left: 8px;
+      }
+      header button.leave {
+        background: var(--error);
+        color: #fff;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        gap: 8px;
+        padding: 8px;
+        overflow: hidden;
+      }
+      #video-container {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 8px;
+        overflow-y: auto;
+      }
+      .video-wrapper {
+        position: relative;
+        background: #02201a;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 16/9;
+      }
+      .video-wrapper video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-label {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+      .connection-status {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--success);
+      }
+      .connection-status.connecting {
+        background: #d6a23c;
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      .connection-status.disconnected { background: var(--error); }
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+      }
+      #chat-container {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border-radius: 12px;
+        border: 1px solid var(--outline);
+      }
+      #chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .chat-message {
+        padding: 10px 12px;
+        background: var(--neutral);
+        border-radius: 10px;
+        font-size: 0.95rem;
+      }
+      .chat-message .sender {
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 4px;
+      }
+      .chat-message.self .sender { color: var(--success); }
+      #chat-input-wrapper {
+        padding: 12px;
+        border-top: 1px solid var(--outline);
+        display: flex;
+        gap: 8px;
+      }
+      #chat-input {
+        flex: 1;
+        padding: 10px 12px;
+        background: var(--surface);
+        border: 1px solid var(--outline);
+        border-radius: 10px;
+        color: inherit;
+        font-family: inherit;
+        font-size: 0.95rem;
+      }
+      #chat-input:focus { outline: 2px solid var(--primary); }
+      #chat-send {
+        padding: 0 16px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 600;
+      }
+      #controls {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--outline);
+        box-shadow: 0 4px 12px rgba(26, 31, 34, 0.08);
+        backdrop-filter: blur(6px);
+      }
+      #controls button {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+        background: var(--neutral);
+        color: var(--primary);
+        transition: transform 0.15s;
+      }
+      #controls button:hover { transform: scale(1.05); }
+      #mic-btn.muted, #cam-btn.off { background: var(--error); color: #fff; }
+      #share-btn.sharing { background: var(--success); color: #fff; }
+      #status {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        font-size: 0.85rem;
+        color: var(--secondary);
+      }
+      @media (max-width: 768px) {
+        main { flex-direction: column; }
+        #chat-container { width: 100%; height: 240px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>Dragonfly Telemed · Room <strong id="room-id"></strong></div>
+      <div>
+        <button id="copy-link-btn">Copy link</button>
+        <button id="leave-btn" class="leave">Leave</button>
+      </div>
+    </header>
+
+    <main>
+      <div id="video-container">
+        <div class="video-wrapper" id="local-wrapper">
+          <video id="local-video" autoplay muted playsinline></video>
+          <div class="video-label" id="local-label">You</div>
+        </div>
+        <div id="remote-videos"></div>
+      </div>
+      <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div id="chat-input-wrapper">
+          <input type="text" id="chat-input" placeholder="Type a message…" />
+          <button id="chat-send">Send</button>
+        </div>
+      </div>
+    </main>
+
+    <div id="controls">
+      <button id="mic-btn" title="Mute / Unmute">🎤</button>
+      <button id="cam-btn" title="Camera On / Off">📹</button>
+      <button id="share-btn" title="Share screen">🖥️</button>
+    </div>
+
+    <div id="status">Connecting…</div>
+
+    <script src="/room.js"></script>
+  </body>
+</html>

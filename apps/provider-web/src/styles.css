@@ -1,0 +1,238 @@
+/* Provider dashboard — denser, desktop-first, same Dragonfly tokens. */
+
+:root {
+  --color-primary: #0e5a6f;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #c7e8ee;
+  --color-on-primary-container: #002731;
+  --color-secondary: #4a5c66;
+  --color-tertiary: #9e4a1f;
+  --color-on-tertiary: #ffffff;
+  --color-neutral: #faf7f2;
+  --color-on-neutral: #1a1f22;
+  --color-surface: #ffffff;
+  --color-on-surface: #1a1f22;
+  --color-outline: #b5bdc2;
+  --color-success: #2e6b47;
+  --color-warning: #8f5215;
+  --color-error: #b23121;
+
+  --shadow-card: 0 1px 3px rgba(26, 31, 34, 0.06), 0 4px 12px rgba(26, 31, 34, 0.04);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  color: var(--color-on-neutral);
+  background: var(--color-neutral);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; min-height: 100%; }
+body { background: var(--color-neutral); }
+
+a { color: var(--color-primary); text-decoration: none; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.sidebar .brand .logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-on-primary);
+  color: var(--color-primary);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.sidebar a {
+  color: var(--color-on-primary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.85;
+}
+.sidebar a:hover { background: rgba(255, 255, 255, 0.1); }
+.sidebar a.active { background: rgba(255, 255, 255, 0.15); opacity: 1; }
+.sidebar .footer {
+  margin-top: auto;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.main {
+  padding: 24px 32px 48px;
+  overflow-x: auto;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.topbar h1 { font-size: 24px; margin: 0; font-weight: 600; }
+.topbar .meta { color: var(--color-secondary); font-size: 14px; }
+
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.kpi {
+  background: var(--color-surface);
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+.kpi .label { color: var(--color-secondary); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+.kpi .value { font-size: 32px; font-weight: 700; margin-top: 4px; }
+.kpi .delta { font-size: 12px; color: var(--color-secondary); }
+
+.table {
+  width: 100%;
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+.table th, .table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-outline);
+  font-size: 14px;
+}
+.table th {
+  background: var(--color-neutral);
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: rgba(14, 90, 111, 0.04); cursor: pointer; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.pill-success { background: var(--color-success); color: #fff; }
+.pill-warning { background: var(--color-warning); color: #fff; }
+.pill-error   { background: var(--color-error);   color: #fff; }
+.pill-muted   { background: var(--color-primary-container); color: var(--color-on-primary-container); }
+
+.panel {
+  background: var(--color-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.panel h2 { margin: 0 0 12px; font-size: 18px; font-weight: 600; }
+.panel h3 { margin: 16px 0 8px; font-size: 14px; font-weight: 600; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.list-clean { list-style: none; padding: 0; margin: 0; }
+.list-clean li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-outline);
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.list-clean li:last-child { border-bottom: none; }
+
+.spark-svg {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary { background: var(--color-tertiary); color: var(--color-on-tertiary); }
+.btn-secondary { background: var(--color-surface); color: var(--color-primary); border: 1px solid var(--color-outline); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.field label { font-size: 12px; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.04em; }
+.input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-outline);
+  font-size: 14px;
+  background: var(--color-surface);
+}
+.banner {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+/* Audit table — sticky header + comfortable single-page scrolling. */
+.audit-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.audit-table tbody tr:hover { background: rgba(14, 90, 111, 0.04); cursor: default; }
+
+/* Borderless button that looks like an inline link. Used in the audit
+   table so any cell value can be clicked to set a filter without
+   turning the screen into a sea of pill buttons. */
+.link-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.link-btn:hover { text-decoration: underline; }
+.link-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 2px; }

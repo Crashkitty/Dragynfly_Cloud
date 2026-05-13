@@ -1,0 +1,27 @@
+name = "dragonfly-telemed"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+
+# Operator-supplied ICE servers. Empty by default — we do NOT bake in
+# Google STUN. For most NAT environments you'll want to point at a
+# self-hosted coturn instance behind cloudflared. See docs/CLOUDFLARED.md.
+[vars]
+STUN_URLS = ""
+TURN_URLS = ""
+# TURN_USERNAME and TURN_CREDENTIAL are secrets; set with
+# `wrangler secret put TURN_USERNAME` etc.
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "Room"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Room"]
+
+[observability]
+enabled = true
