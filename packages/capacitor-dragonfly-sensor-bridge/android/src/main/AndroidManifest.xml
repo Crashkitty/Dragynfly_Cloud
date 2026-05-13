@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- NFC for Libre sensor tap-reading. The plugin uses ReaderMode
+       (NfcAdapter.enableReaderMode) so we don't need an IntentFilter
+       to launch the Activity from outside; the patient PWA explicitly
+       requests a read from inside the foreground app. -->
+  <uses-permission android:name="android.permission.NFC" />
+  <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+  <!-- BLE for Dexcom G6 / G7 brief foreground connect-and-read. We are
+       *not* a background scanner; the user opens the bridge screen, we
+       scan, connect, read, disconnect. Permissions reflect Android 12+
+       (API 31+) which is the realistic study-cohort floor; older devices
+       additionally need ACCESS_FINE_LOCATION which is included with
+       maxSdkVersion=30 so newer devices don't have to grant location.
+       neverForLocation hints to the OS that the BLE scans are not used
+       for deriving location. -->
+  <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+                   android:usesPermissionFlags="neverForLocation" />
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+                   android:maxSdkVersion="30" />
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+</manifest>

@@ -1,0 +1,28 @@
+{
+  "name": "dragonflycloud",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Dragonfly Cloud — Diabetes Taiyi Intervention Pilot Study (Cloudflare-native PWA-first MVP)",
+  "workspaces": [
+    "apps/patient-pwa",
+    "apps/provider-web",
+    "apps/telemed",
+    "apps/patient-shell",
+    "workers/api",
+    "packages/shared",
+    "packages/capacitor-dragonfly-sensor-bridge"
+  ],
+  "scripts": {
+    "dev:patient": "npm run dev --workspace=@dragonfly/patient-pwa",
+    "dev:provider": "npm run dev --workspace=@dragonfly/provider-web",
+    "dev:api": "npm run dev --workspace=@dragonfly/api",
+    "dev:telemed": "npm run dev --workspace=@dragonfly/telemed",
+    "dev": "concurrently --names api,patient,provider,telemed --prefix-colors auto -k npm:dev:api npm:dev:patient npm:dev:provider npm:dev:telemed",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

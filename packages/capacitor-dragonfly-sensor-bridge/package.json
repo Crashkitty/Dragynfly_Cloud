@@ -1,0 +1,35 @@
+{
+  "name": "@dragonfly/capacitor-sensor-bridge",
+  "version": "0.1.0",
+  "description": "Capacitor plugin that satisfies the BridgeAdapter contract from apps/patient-pwa. Stores the bridge token in iOS Keychain / Android EncryptedSharedPreferences and authenticates POST /api/glucose/sync requests itself; the WebView never holds the raw token after install.",
+  "private": true,
+  "type": "module",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "DragonflySensorBridge.podspec"
+  ],
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@capacitor/core": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

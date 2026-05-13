@@ -1,0 +1,35 @@
+name = "dragonfly-api"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+ALLOWED_ORIGINS = "http://localhost:5173,http://localhost:5174"
+
+# Cloudflare D1 — primary persistence. Self-contained, no third-party.
+# First-time setup:
+#   wrangler d1 create dragonfly
+# then paste the database_id below.
+# Run the schema (locally first):
+#   wrangler d1 execute dragonfly --local --file=migrations/0001_init.sql
+[[d1_databases]]
+binding = "DB"
+database_name = "dragonfly"
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# R2 bucket for meal/glucose evidence media. Wrangler dev auto-provisions
+# a local bucket; for remote you must:
+#   wrangler r2 bucket create dragonfly-media
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "dragonfly-media"
+
+# Secrets — set with `wrangler secret put NAME`. Local dev: put into
+# .dev.vars (gitignored). Both are required for the corresponding feature
+# to work; routes return 503 with a clear message if missing.
+#
+# UPLOAD_SIGNING_SECRET     HMAC key for signed R2 upload/download URLs
+# BRIDGE_PROVISIONING_SECRET  Coordinator-only secret for minting bridge tokens
+
+[observability]
+enabled = true
